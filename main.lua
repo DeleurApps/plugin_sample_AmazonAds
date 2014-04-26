@@ -5,7 +5,9 @@ local json = require "json"
 
 local function Callback(event)
 	print("Callback: "..json.encode(event))
-	if event.name == "Ad collapsed" then
+	if event.name == "licence" then
+		print("event.type: "..event.type, "event.status: "..event.status)
+	elseif event.name == "Ad collapsed" then
 		print("Ad collapsed")
 	elseif event.name == "Ad failed to load" then
 		print("Ad failed to load. isError:"..tostring(event.isError), event.response)
