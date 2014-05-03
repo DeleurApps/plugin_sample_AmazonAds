@@ -7,14 +7,14 @@ local function Callback(event)
 	print("Callback: "..json.encode(event))
 	if event.name == "licence" then
 		print("event.type: "..event.type, "event.status: "..event.status)
-	elseif event.name == "Ad collapsed" then
+	elseif event.name == "collapsed" then
 		print("Ad collapsed")
-	elseif event.name == "Ad failed to load" then
+	elseif event.name == "failed" then
 		print("Ad failed to load. isError:"..tostring(event.isError), event.response)
-	elseif event.name == "Ad loaded" then
+	elseif event.name == "loaded" then
 		print("Ad loaded", event.response)
-	elseif event.name == "onAdExpanded" then
-		print("onAdExpanded")
+	elseif event.name == "expanded" then
+		print("Ad expanded")
 	end
 end
 amazonAds.init({appKey = "sample-app-v1_pub-2", testMode = true, licenseKey = "licenceKey"}, Callback)

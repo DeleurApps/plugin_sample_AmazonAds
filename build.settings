@@ -28,7 +28,7 @@ settings =
 	plugins =
 	{
 		-- key is the name passed to Lua's 'require()'
-		["plugin.AmazonAds"] =
+		["plugin.amazonAds"] =
 		{
 			-- required
 			publisherId = "com.deleurapps",
