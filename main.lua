@@ -5,7 +5,7 @@ local json = require "json"
 
 local function Callback(event)
 	print("Callback: "..json.encode(event))
-	if event.name == "licence" then
+	if event.name == "license" then
 		print("event.type: "..event.type, "event.status: "..event.status)
 	elseif event.name == "collapsed" then
 		print("Ad collapsed")
@@ -15,26 +15,43 @@ local function Callback(event)
 		print("Ad loaded", event.response)
 	elseif event.name == "expanded" then
 		print("Ad expanded")
+	elseif event.name == "dismissed" then
+		print("Ad dismissed")
 	end
 end
-amazonAds.init({appKey = "sample-app-v1_pub-2", testMode = true, licenseKey = "licenceKey"}, Callback)
+amazonAds.init({appKey = "sample-app-v1_pub-2", testMode = true, licenseKey = "LicenseKey"}, Callback)
 
 
 
-local function pressShowButton(event)
+local function pressShowBannerButton(event)
 	amazonAds.show({x=0, y=0, timeout = 20, size = "SIZE_300x250"}) --Sizes(optional): "SIZE_1024x50", "SIZE_300x250", "SIZE_300x50", "SIZE_320x50", "SIZE_600x90", "SIZE_728x90"; x=0, y=0 for default (top) positioning. top left coordinates of banners
 end
 
 
-local showButton = widget.newButton
+local showBannerButton = widget.newButton
 {
 	width = 198,
 	height = 59,
-	label = "Show",
-	onRelease = pressShowButton,
+	label = "Show Banner",
+	onRelease = pressShowBannerButton,
 }
-showButton.x = display.contentWidth/2
-showButton.y = display.contentHeight/4
+showBannerButton.x = display.contentWidth/2
+showBannerButton.y = display.contentHeight/6
+
+local function pressShowInterstitialButton(event)
+	amazonAds.show({size = "interstitial"}) 
+end
+
+
+local showInterstitialButton = widget.newButton
+{
+	width = 198,
+	height = 59,
+	label = "Show Interstitial",
+	onRelease = pressShowInterstitialButton,
+}
+showInterstitialButton.x = display.contentWidth/2
+showInterstitialButton.y = display.contentHeight/6*2
 
 local function pressHideButton(event)
 	amazonAds.hide()
@@ -49,5 +66,35 @@ local hideButton = widget.newButton
 	onRelease = pressHideButton,
 }
 hideButton.x = display.contentWidth/2
-hideButton.y = display.contentHeight* 3/4
+hideButton.y = display.contentHeight/6*3
+
+local function pressHideBannerButton(event)
+	amazonAds.hide("banner")
+end
+
+
+local hideBannerButton = widget.newButton
+{
+	width = 198,
+	height = 59,
+	label = "Hide Banner",
+	onRelease = pressHideBannerButton,
+}
+hideBannerButton.x = display.contentWidth/2
+hideBannerButton.y = display.contentHeight/6*4
+
+local function pressHideInterstitialButton(event)
+	amazonAds.hide("interstitial")
+end
+
+
+local hideInterstitialButton = widget.newButton
+{
+	width = 198,
+	height = 59,
+	label = "Hide Interstitial",
+	onRelease = pressHideInterstitialButton,
+}
+hideInterstitialButton.x = display.contentWidth/2
+hideInterstitialButton.y = display.contentHeight/6*5
 
